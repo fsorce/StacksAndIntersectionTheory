@@ -9,6 +9,7 @@ Le lezioni si dividono in tre parti:
 
 Ringrazio gli altri partecipanti al grading group e in particolare gli organizzatori per il loro supporto nella redazione di queste note.
 
+---
 
 These are notes for the lectures given in the context of a reading group on Stacks and intersection theory held in Pisa during the spring/summer semester of 2025.
 
