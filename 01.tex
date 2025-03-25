@@ -4,6 +4,215 @@
 \end{center}
 \bigskip
 
+\noindent
+The references for this chaper are \cite{vistoli2007notesgrothendiecktopologiesfibered} and \cite{olsson2016algebraic}.
+
+\section{Grothendieck topology and sheaves}
+Recall that a presheaf on $X$ is a functor
+\[F:\Open(X)\op\to \Set\]
+and that a sheaf is a presheaf that respects certain gluing properties over open covers.
+
+As we will see in the next chapters, it will be useful to try and define sheaves over more general categories, that is, we want to substitute $\Open(X)$ with some other category. The only topological notions which come up when we want to define sheaves are open covers of open subsets of $X$, so if we want to generalize sheaves we need define what ``open covers" for objects $X\in \Cc$ should be.
+
+\begin{definition}[]
+Let $\Cc$ be a category. We define a \textbf{Grothendieck topology} on $\Cc$ to be the following data: for all $U\in \Cc$ we have a collection $\Cov(U)$ of sets of arrows $\cpa{U_i\to U}$ in $\Cc$, called \textbf{covers of $U$}, and these covers respect the following properties:
+\begin{enumerate}
+\item If $V\to U$ is an isomorphism in $\Cc$ then $\cpa{V\to U}\in \Cov(U)$.
+\item If $\cpa{U_i\to U}\in \Cov(U)$ and $V\to U$ arrow in $\Cc$ then we can fix fiber products $U_i\times_U V\to V$ such that $\cpa{U_i\times_U V\to V}\in \Cov(V)$.
+\item If $\cpa{U_i\to U}\in \Cov(U)$ and for all $i$ we have $\cpa{V_{ij}\to U_i}\in \Cov(U_i)$ then $\cpa{V_{ij}\to U}\in \Cov(U)$, where the arrows $V_{ij}\to U$ are given by the composition $V_{ij}\to U_i\to U$.
+\end{enumerate}
+A category with a fixed Grothendieck topology is called a \textbf{site}.
+\end{definition}
+\begin{remark}
+According to \cite{EGA4}, what we have defined is called a \textit{pretopology}, a full Grothendieck topology is a looser notion which consideres pretopologies equivalent when they give the same sheaf theory. We are going to ignore this subtelty from now on. For a little more detail on this distinction you may also look at \cite{vistoli2007notesgrothendiecktopologiesfibered}.
+\end{remark}
+
+\begin{example}
+Let $X$ be a topological space and let $\Open(X)$ be the category of its open subsets (the arrows are inclusions). The category $\Open(X)$ with the usual notion of open covers is a site:
+\begin{enumerate}
+\item If $V\to U$ is an isomorphism then we have an inverse $U\to V$, but the arrows are inclusions so $V=U$ and of course $U$ is an open cover of $U$.
+\item Let $\cpa{U_i}$ be an open cover of $U$ and let $V$ is another open set in $X$ which is contained in $U$. Note that $V\times_U U_i=V\cap U_i$ because of how fibered products work in $\Open(X)$. We conclude the proof of this property by noting that indeed $\cpa{V\cap U_i}$ is an open cover of $V$ if $V\subseteq U$.
+\item Let $\cpa{U_i}$ be an open cover of $U$ and for all $i$ let $\cpa{V_{ij}}$ be an open cover of $U_i$, then it is clear that $\cpa{V_{ij}}$ (now with $i$ variable) is an open cover of $U$.
+\end{enumerate}
+\end{example}
+
+\begin{notation}
+If $\cpa{U_i\to U}$ is a cover of $U$ with respect to some Grothendieck topology, we take $U_{ij}$ to be some choice for $U_i\times_U U_j$ and similarly for $U_{ijk}$. From now on we will implicitly fix such fibered products.
+\end{notation}
+
+We now move on to the general definition of presheaves, separated presheaves and sheaves:
+\begin{definition}[]
+Let $\Cc$ be a category. A \textbf{presheaf} on $\Cc$ is a functor $F:\Cc\op\to \Set$. If $f:V\to U$ is an arrow in $\Cc$ and $\xi\in F(U)$ for $F$ presheaf, we define the \textbf{pullback of $\xi$ along $f$} (also called the \textbf{restriction of $\xi$ to $V$}) to be
+\[F(f)(\xi)\in F(V).\]
+The pullback of $\xi$ may be written as $f^\ast\xi$ or $\xi\res V$ when no ambiguity may arise.
+\bigskip
+
+\noindent
+Suppose now that $\Cc$ is also a site, then a presheaf $F$ on $\Cc$ is a
+\begin{itemize}
+\item \textbf{separated presheaf} if for all $U\in \Cc$, all $\cpa{u_i:U_i\to U}\in \Cov(U)$ and all pairs of elements $\xi,\eta\in F(U)$, we have that
+\[(\forall i\quad \xi\res{U_i}=\eta\res{U_i})\implies \xi=\eta.\]
+\item \textbf{sheaf} if for all $U\in \Cc$, all covers $\cpa{U_i\to U}\in \Cov(U)$ and all collections $\xi_i\in F(U_i)$ for each $i$ such that $\xi_i\res{U_{ij}}=\xi_j\res{U_{ij}}$ for all $i,j$, there exists a unique $\xi\in F(U)$ such that $\xi\res{U_i}=\xi_i$.
+\end{itemize} 
+\end{definition}
+
+\begin{remark}
+One may define sheaves that take values in Groups, Rings and so on instead of just Sets. The next chapter will essentially define sheaves that take values in categories but we are getting ahead of ourselves.
+\end{remark}
+
+\begin{definition}[]
+If $F,G$ are sheaves on $\Cc$, a \textbf{morphism between} them is a natural transformation of functors $\Cc\op\to \Set$.
+\end{definition}
+
+\begin{remark}
+A sheaf is in particular a separated presheaf.
+\end{remark}
+
+\begin{theorem}
+Let $\Cc$ be a site. The forgetful functor $\Sh(\Cc)\to \Pre(\Cc)$ has a left adjoint called \textbf{sheafification}.
+\end{theorem}
+\begin{proof}
+A full proof is in \cite{olsson2016algebraic}. The main idea is to compose left adjoints $\Pre(\Cc)\to \mathrm{Sep}\Pre(\Cc)\to \Sh(\Cc)$. For the first piece we identify two elements of $F(U)$ when they agree on a cover of $U$, for the second we add all gluings.
+\end{proof}
+
+
+
+\section{Examples of Grothendieck topologies}
+As we have already noted, $\Open(X)$ for some topological space $X$ defines a site when considering open covers in the classical sense. The first new site which we define is a way the \textit{global} version of this
+
+\begin{definition}[]
+Let $\cpa{U_i\to U}$ be a collection of functions to $U$. We say that these arrows are \textbf{jointly surjective} if the union of the images is $U$.
+\end{definition}
+
+\begin{example}[Global classical topology]
+Let $\Cc=\Top$. For any topological space $X\in \Top$ we define $\Cov(X)$ to be the collection of jointly surjective sets of open immersions into $X$, that is, $\cpa{j_i:U_i\to X}\in \Cov(X)$ if $\bigcup_{i}\imm j_i=X$ and all $j_i$ are open immersions.
+\end{example}
+
+\begin{remark}
+We can't define $\Cov(X)=\cpa{\text{open covers of $X$}}$ in the previous example because, for instance, the first property in the definition of Grothendieck topology fails.
+\end{remark}
+
+We have a more algebro-geometric version of this example given by
+
+\begin{example}[Global Zariski topology]
+Let $\Cc=\Sch/S$. If $X$ is a scheme over $S$ then we define $\Cov(X)$ to be the collection of jointly surjective sets of open embeddings of schemes over $S$.
+\end{example}
+
+
+So far these sites have not been too out of the ordinary, but now we start to get to more sofisticated, yet useful, examples
+
+\begin{definition}[]
+Let $f:X\to Y$ be a morphism of schemes. We say that $f$ is \textbf{formally unramified} (resp.  \textbf{formally smooth} / \textbf{formally \'etale}) if for all affine $Y$-schemes $Y'\to Y$ and all closed embeddings $Y_0'\to Y'$ defined by nilpotent ideals, then map
+\[\Hom(Y',X)\to \Hom(Y_0',X)\]
+is injective (resp. surjective / bijective).
+
+Moreover, if $f$ is also locally of finte presentation then we say that $f$ is \textbf{unramified} / \textbf{smooth} / \textbf{\'etale} when the same conditions hold.
+\end{definition}
+
+With these definitions we can define
+\begin{example}[Small smooth / \'etale topology]
+Let $\wt \Cc=\Sch/S$ and let $\Cc$ be the full subcategory with objects given by arrows $X\to S$ which are smooth / \'etale. If $X\in \Cc$ then we can define $\Cov(X)$ to be jointly surjective sets of maps which are all smooth / \'etale.
+\end{example}
+
+
+\begin{example}[Big \'etale topology]
+Let $\Cc=\Sch/S$. If $X\in \Cc$ then we define $\Cov(X)$ to be jointly surjective sets of \'etale maps.
+\end{example}
+
+
+
+\subsection{The fppf and fpqc topologies}
+
+The classical and \'etale topologies are already useful, but they are not the gold-standard for many applications.
+
+For some motivation, consider the following problem: recall that if $f:X\to Y$ is a morphism of schemes and $\Pc$ is some property of this morphism, we say that the property is \textbf{stable under base change} if for all $Y'\to Y$, when we build a cartesian square
+% https://q.uiver.app/#q=WzAsNCxbMCwwLCJYXFx0aW1lc19ZWSciXSxbMSwwLCJZJyJdLFsxLDEsIlkiXSxbMCwxLCJYIl0sWzMsMiwiZiJdLFswLDEsImYnIl0sWzEsMl0sWzAsM11d
+\[\begin{tikzcd}
+	{X\times_YY'} & {Y'} \\
+	X & Y
+	\arrow["{f'}", from=1-1, to=1-2]
+	\arrow[from=1-1, to=2-1]
+	\arrow[from=1-2, to=2-2]
+	\arrow["f", from=2-1, to=2-2]
+\end{tikzcd}\]
+then if $f$ has property $\Pc$ it follows that $f'$ also has property $\Pc$.
+
+We want to explore the converse in some sense, that is: suppose we have $f:X\to Y$ and fix a cover $\cpa{Y_i\to Y}$. If all restrictions $X\times_YY_i\to Y_i$ have property $\Pc$, when is it the case that $f$ itself has property $\Pc$?
+
+
+The covers in the classical and \'etale topolgies make it ``too easy" to have this ``local to global" condition be true, to the point where it is not easy at all to check that the property holds locally. To have this local-to-global principle being useful, we may require finer topologies. The fppf and fpqc are the usual answers when such questions arise.
+
+\begin{definition}[fppf topology]
+Let $\Cc=\Sch/S$. A cover for $X\in \Cc$ in the \textbf{fppf topology} (it stands for \textit{faithfully flat and locally of finite presentation}) is a jointly surjective collection of flat maps which are locally of finite presentation. 
+\end{definition}
+
+\begin{definition}
+A morphism $f:X\to Y$ is \textbf{fpqc} (it stands for \textit{faithully flat and quasi-compact}) if it is flat, surjective and every quasi-compati open subset of $Y$ is the image of a quasi-compact open subset of $X$.
+\end{definition}
+
+\begin{remark}
+Equivalent definitions of fpqc are given in \cite{vistoli2007notesgrothendiecktopologiesfibered}.
+\end{remark}
+
+
+In order to define the fpqc topology we require the following proposition, which you can find in \cite{vistoli2007notesgrothendiecktopologiesfibered}.
+
+\begin{proposition}[]
+The property of being fpqc is stable under composition and base change. Moreover, if $f:X\to Y$ and $\cpa{V_i\to Y}$ is an open cover (for the classical topology) such that $f\res{f\ii(V_i)}:f\ii(V_I)\to V_i$ is fpqc for all $i$ then $f$ is fpqc.
+\end{proposition}
+
+\begin{definition}[fpqc topology]
+Let $\Cc=\Sch/S$. A cover for $X\in \Cc$ in the \textbf{fpcq topology} is a collection of scheme morphisms $\cpa{U_i\to X}$ such that the induced map $\coprod U_i\to X$ is fpqc.
+\end{definition}
+
+
+
+\begin{remark}
+The topologies that we have defined have become gradually finer, that is
+\[\text{Zariski}\subseteq \text{\'etale}\subseteq \text{fppf}\subseteq \text{fpqc}\]
+\end{remark}
+
+We conclude the chapter by stating that the fpqc and fppf topologies to give an answer to the local-to-global question we started with:
+
+\begin{proposition}[]
+Let $f:X\to Y$ be a morphism of schemes, $\cpa{Y_i\to Y}$ be an fpqc cover of $Y$ and $f_i$ be the pullbacks $f_i:X\times_YY_i\to Y_i$. It is the case that if all $f_i$ have property $\Pc$ then $f$ has $\Pc$ for $\Pc$ in the following (non-exhaustive) list
+\begin{multicols}{2}
+\begin{itemize}
+\item separable
+\item surjective
+\item locally of finte type
+\item locally of finite presentation
+\item proper
+\item flat
+\item affine
+\item finite
+\item smooth
+\item unramified
+\item \'etale
+\end{itemize}
+\end{multicols}
+\end{proposition}
+
+\begin{remark}
+An analogous result holds for fppf where the list consists of properties of the form ``is an immersion" (for example open, closed and locally closed immersions).
+\end{remark}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
