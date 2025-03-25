@@ -1,0 +1,3 @@
+# Stacks and intersection theory
+
+

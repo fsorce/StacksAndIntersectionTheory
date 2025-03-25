@@ -1,0 +1,67 @@
+\documentclass[a4paper]{report}
+\input{style/packagesNtheorems.tex}
+\input{style/fancystyle.tex}
+\input{style/macros.tex}
+
+%\usepackage{cleveref}
+
+
+% ============================================
+
+
+%---------- Comandi specifici ----------------
+\DeclareMathOperator{\Der}{Der}
+\DeclareMathOperator{\SO}{SO}
+\DeclareMathOperator{\Mat}{Mat}
+\DeclareMathOperator{\Fun}{Fun}
+\DeclareMathOperator{\Arr}{Arr}
+\DeclareMathOperator{\Cov}{Cov}
+
+\newcommand{\Diag}{\mathrm{Diag}}
+\newcommand{\Ab}{\mathrm{Ab}}
+\newcommand{\Mon}{\mathrm{Mon}}
+\newcommand{\Set}{\mathrm{Set}}
+\newcommand{\Sch}{\mathrm{Sch}}
+\newcommand{\Sh}{\mathrm{Sh}}
+\newcommand{\Cat}{\mathrm{Cat}}
+\newcommand{\Top}{\mathrm{Top}}
+\newcommand{\pr}{\mathrm{pr}}
+
+\newcommand{\op}{^{op}}
+
+%--------- Comandi dattilografici ------------
+\newcommand{\coloneqq}{:=}
+
+
+% ============================================
+\title{\huge Stacks and intersection theory
+\vspace{0.7cm}
+
+\Large Reading group}
+
+\author{\Large Typed by Francesco Sorce}
+\date{Università di Pisa\\
+Dipartimento di Matematica\\
+A.A. 2024/25}
+
+\begin{document}
+\maketitle
+
+%\newpage
+\tableofcontents
+\newpage
+
+\part{Stacks}
+\include{01}
+\include{02}
+\include{03}
+
+\part{Intersection theory}
+\include{04}
+
+
+\appendix
+\bibliographystyle{alpha}
+\bibliography{refs}
+
+\end{document}
