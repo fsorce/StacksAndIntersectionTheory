@@ -274,9 +274,13 @@ Since properness seems to play a big role in this theory, we compute the Chow ri
 
 \begin{definition}[]
 Let $X\subseteq \Pj^n$ be an irreducible closed subvariety of dimension $k$. The \textbf{degree} of $X$ is the number of intersection points, counted with multiplicities, it has when intersected with $k$ hyperplanes in general position.
-
-Another defition is the following: Let $P(t)=\frac{h(t)}{(1-t)^k}$ be the Poincar\'e-Hilbert series of $X\subseteq \Pj^n$ ($h(t)$ is a polynomial), then the degree of $X$ is $h(1)$.
 \end{definition}
+
+\begin{remark}
+The following is an equivalent, but perhaps more reassuring, definition of degree: let 
+\[P(t)=\frac{h(t)}{(1-t)^k},\quad h(t)\in \Z[t],\ h(1)\neq 0\]
+be the Poincar\'e-Hilbert series of $X\subseteq \Pj^n$, then the degree of $X$ is $h(1)$.
+\end{remark}
 
 \begin{definition}[]
 Let $X$ be a scheme of finite type of $k$. We call a finite collection of irreducible locally closed subschemes $X_i$ an \textbf{affine stratification} if 
@@ -325,7 +329,7 @@ To get some practice with this ring we conclude with the following exercise
 In $\A^2$ draw three circles $C_1,\ C_2,\ C_3$. 
 \begin{figure}[!htb]
 	\centering
-	\includegraphics[width=5cm]{Images/Three-circles.png}
+	\includegraphics[width=4cm]{Images/Three-circles.png}
 \end{figure}
 
 How many circles can be drawn which are tangent to $C_1$, $C_2$ and $C_3$?
@@ -357,12 +361,8 @@ and the way we impose that is by setting the discriminant of a resulting quadrat
 Moreover, $Z_C$ is birational to $\Phi$ (from a circle in $Z_C$ we can get the point of tangency it has with $C$).
 
 So $Z_{C_1}\subseteq\Pj^3$ is a surface of degree 2. In the Chow group $CH(\Pj^3)$ we thus have $2t=[Z_{C_1}]$ and so
-\[[Z_{C_1}\cap Z_{C_2}\cap Z_{C_3}]=[Z_{C_1}][Z_{C_2}][Z_{C_3}]=(2t)^3=8t^3\]
-and $8t^3\in CH(\Pj^3)$ is the class of eight points.
-
-\begin{center}
-	\textit{The number of tangent circles we were looking for is therefore $8$ when the three circles are in sufficiently general position.}
-\end{center}
+\[[Z_{C_1}\cap Z_{C_2}\cap Z_{C_3}]=[Z_{C_1}][Z_{C_2}][Z_{C_3}]=(2t)^3=8t^3.\]
+$8t^3\in CH(\Pj^3)$ is the class of eight points, so \textit{8 is the number we were looking for\footnote{when the three circles are in general enough position}}.
 \end{proof}
 
 
