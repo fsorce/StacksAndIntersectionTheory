@@ -1,0 +1,296 @@
+\chapter{Chow rings of vector bundles and equivariant setting}
+\begin{center}
+	{\huge Speaker: Bernardo Tarini}
+\end{center}
+\bigskip
+
+\section{Chow ring of vector bundles}
+
+Recall that we have a correspondence
+\[\correspDef{\cpa{\text{algebraic vector bundles of rank $n$}}}{\cpa{\text{locally free sheaves of rank $n$}}}{E\to X}{\text{sheaf of sections of $E$}}{\ul{\Spec }_{\Oc_X}(\Sym \Ec^\vee)}{\Ec}\]
+
+\subsection{Chow ring of a vector bundle is isomorphic to the Chow ring of the base}
+
+Recall the principal of Noetherian induction:
+\begin{lemma}[]
+Let $X$ be a Noetherian topological space, and let $P$ be a property of closed subset of $X$. Assume that for any closed subset $Y$ of $X$, if $P$ holds for every proper closed subset of $Y$, then $P$ holds for $Y$\footnote{In particular, $P$ must hold for the empty set.}. Then $P$ holds for $X$.
+\end{lemma}
+
+\begin{theorem}[]
+Let $\pi:E\to X$ be a vector bundle. The pullback map $\pi^\ast:CH^\bullet(X)\to CH^\bullet(E)$ is an isomorphism and the inverse is provided by taking the bullback via the zero-section $s:X\to E$.
+\end{theorem}
+\begin{proof}
+Injectivity of $\pi^\ast$ follows by noting that
+\[\pi\circ s=id_X\implies s^\ast\circ \pi^\ast=(\pi\circ s)^\ast=id_{CH^\bullet(X)}.\]
+Now we move on to surjectivity. First let us reduce to the case where $E\cong X\times\A^n$ is the trivial bundle:
+Let $\Spec R=U\subseteq X$ be a dense affine trivializing open subset. Note that $CH^\bullet(\emptyset)=CH^\bullet(E\res \emptyset)$, so by Noetherian induction we may assume that surjectivity hold for all proper closed subsets of $X$, in particular also for $Z=X\bs U$ because $\dim Z<\dim X$ guarantees properness. Consider now the commutative diagram
+% https://q.uiver.app/#q=WzAsOSxbMSwxLCJDSF5cXGJ1bGxldChFKSJdLFswLDEsIkNIXlxcYnVsbGV0KEVcXHJlc3tafSkiXSxbMCwyLCJDSF5cXGJ1bGxldChaKSJdLFsxLDIsIkNIXlxcYnVsbGV0KFgpIl0sWzIsMSwiQ0heXFxidWxsZXQoRVxccmVzIFUpIl0sWzMsMSwiMCJdLFszLDIsIjAiXSxbMiwyLCJDSF5cXGJ1bGxldChVKSJdLFsyLDAsIkNIXlxcYnVsbGV0KFxcQV5uXFx0aW1lcyBVKSJdLFsyLDEsIlxccGleXFxhc3QiXSxbMSwwLCJpX1xcYXN0Il0sWzIsM10sWzMsN10sWzcsNl0sWzQsNV0sWzAsNF0sWzMsMCwiXFxwaV5cXGFzdCJdLFs3LDQsIlxccGleXFxhc3QiXSxbNCw4LCI9IiwzLHsic3R5bGUiOnsiYm9keSI6eyJuYW1lIjoibm9uZSJ9LCJoZWFkIjp7Im5hbWUiOiJub25lIn19fV1d
+\[\begin{tikzcd}
+	&& {CH^\bullet(\A^n\times U)} \\
+	{CH^\bullet(E\res{Z})} & {CH^\bullet(E)} & {CH^\bullet(E\res U)} & 0 \\
+	{CH^\bullet(Z)} & {CH^\bullet(X)} & {CH^\bullet(U)} & 0
+	\arrow["{i_\ast}", from=2-1, to=2-2]
+	\arrow[from=2-2, to=2-3]
+	\arrow["{=}"{marking, allow upside down}, draw=none, from=2-3, to=1-3]
+	\arrow[from=2-3, to=2-4]
+	\arrow["{\pi^\ast}", from=3-1, to=2-1]
+	\arrow[from=3-1, to=3-2]
+	\arrow["{\pi^\ast}", from=3-2, to=2-2]
+	\arrow[from=3-2, to=3-3]
+	\arrow["{\pi^\ast}", from=3-3, to=2-3]
+	\arrow[from=3-3, to=3-4]
+\end{tikzcd}\]
+Because of what we said the left-most vertical arrow is surjective and the rows are exact, so if the arrow on the right is surjective, the one in the middle also is.
+
+We may therefore suppose $E=X\times\A^n$. We may now view this bundle as a series of consecutive line bundles
+\[U\times \A^{n}\to U\times \A^{n-1}\to\cdots\to U\times \A^1\to U\]
+so without loss of generality we may actually consider $E=U\times\A^1$. Without loss of generality we also consider $U$ to be irreducible (WHY???????)
+
+Take $\al=[V]\in CH^\bullet(U\times \A^1)$ for $V$ irreducible. Because of the diagram
+% https://q.uiver.app/#q=WzAsNCxbMSwxLCJDSF5cXGJ1bGxldChVKSJdLFsxLDAsIkNIXlxcYnVsbGV0KFVcXHRpbWVzXFxBXjEpIl0sWzAsMCwiQ0heXFxidWxsZXQoRVxccmVze1xcb2x7XFxwaShWKX19KSJdLFswLDEsIkNIXlxcYnVsbGV0KFxcb2x7XFxwaShWKX0pIl0sWzAsMSwiXFxwaV5cXGFzdCIsMl0sWzMsMiwiXFxwaV5cXGFzdCIsMl0sWzIsMSwiaV9cXGFzdCJdLFszLDAsImlfXFxhc3QiXV0=
+\[\begin{tikzcd}
+	{CH^\bullet(E\res{\ol{\pi(V)}})} & {CH^\bullet(U\times\A^1)} \\
+	{CH^\bullet(\ol{\pi(V)})} & {CH^\bullet(U)}
+	\arrow["{i_\ast}", from=1-1, to=1-2]
+	\arrow["{\pi^\ast}"', from=2-1, to=1-1]
+	\arrow["{i_\ast}", from=2-1, to=2-2]
+	\arrow["{\pi^\ast}"', from=2-2, to=1-2]
+\end{tikzcd}\]
+we may (by noetherian induction ??????) suppose that $U=\ol{\pi(V)}$. Therefore $\dim U\leq \dim V\leq \dim U+1$. If $\dim V=\dim U+1$ then by irreducibility $V=U\times\A^1$ and so $[V]=\pi^\ast[U]$. 
+
+
+Let us now suppose $\dim V=\dim U$. Consider the following diagram
+% https://q.uiver.app/#q=WzAsNyxbMSwxLCJFX1xceGkiXSxbMSwyLCJVX1xceGkiXSxbMCwxLCJcXEFeMV97ayhcXHhpKX0iXSxbMiwxLCJcXEFeMVxcdGltZXMgVSJdLFsyLDIsIlUiXSxbMSwwLCJWX1xceGkiXSxbMiwwLCJWIl0sWzAsMSwiXFxwaSIsMl0sWzEsNF0sWzAsM10sWzMsNF0sWzUsMCwiXFxzdWJzZXRlcSIsMyx7InN0eWxlIjp7ImJvZHkiOnsibmFtZSI6Im5vbmUifSwiaGVhZCI6eyJuYW1lIjoibm9uZSJ9fX1dLFsyLDAsIj0iLDMseyJzdHlsZSI6eyJib2R5Ijp7Im5hbWUiOiJub25lIn0sImhlYWQiOnsibmFtZSI6Im5vbmUifX19XSxbNiwzLCJcXHN1YnNldGVxIiwzLHsic3R5bGUiOnsiYm9keSI6eyJuYW1lIjoibm9uZSJ9LCJoZWFkIjp7Im5hbWUiOiJub25lIn19fV0sWzUsNl1d
+\[\begin{tikzcd}
+	& {V_\xi} & V \\
+	{\A^1_{k(\xi)}} & {E_\xi} & {\A^1\times U} \\
+	& {U_\xi} & U
+	\arrow[from=1-2, to=1-3]
+	\arrow["\subseteq"{marking, allow upside down}, draw=none, from=1-2, to=2-2]
+	\arrow["\subseteq"{marking, allow upside down}, draw=none, from=1-3, to=2-3]
+	\arrow["{=}"{marking, allow upside down}, draw=none, from=2-1, to=2-2]
+	\arrow[from=2-2, to=2-3]
+	\arrow["\pi"', from=2-2, to=3-2]
+	\arrow[from=2-3, to=3-3]
+	\arrow[from=3-2, to=3-3]
+\end{tikzcd}\]
+where $\xi$ is the generic point of $U$.
+Note that $V_\xi=V(p(x))$ for $p(x)\in \Frac(R)[x]$. But if this happens at the generic fiber we can take a open set $U'$ where the denominators of $p$ are inverted and find that $V\cap U'=V(p(x))$. 
+
+Now consider the localization sequence
+\[CH^\bullet(E\res{U\bs U'})\to CH^\bullet(E)\to CH^\bullet(E\res{U'})\to 0\]
+Since $[V]$ goes to 0 we have that $[V]=\sum n_i[V_i]$ where $V_i\subseteq E\res{U\bs U'}$, which has a dimension smaller than that of $E\res U$, so we are done by Noetherian induction.
+\end{proof}
+
+\begin{corollary}[]
+$CH^\bullet(\A^n)\cong CH^\bullet(\Spec k)\cong \Z$
+\end{corollary}
+
+
+
+
+
+Recall the projection formula: if $f:V\to X$ is a proper map between smooth schemes over $k$ then $f_\ast:CH^\bullet(Y)\to CH^\bullet(X)$ is an homomorphism of $CH^\bullet(X)$-modules, that is
+\[f_\ast(f^\ast(\al)\beta)=(f_\ast\beta)\al.\]
+
+
+\subsection{Self intersection formula}
+
+\begin{definition}[Normal bundle]
+Let $i:X\to Y$ be a regular immersion of smooth schemes of codimension $r$. If $\Ic\subseteq \Oc_Y$ is the ideal which defines $X$ then $\Ic/\Ic^2$ is locally free sheaf of rank $r$. The normal bundle is
+\[\Nc_{X/Y}=\ul{\Spec}_{\Oc_X}\pa{\Sym \Ic/\Ic^2}\]
+\end{definition}
+
+\begin{theorem}[Self-intersection formula]
+Let $i:X\to Y$ be a regular immersion of smooth schemes of codimension $r$. Then $i^\ast i_\ast(\al)=\al c_r(\Nc_{X/Y})$.
+\end{theorem}
+
+
+
+
+\begin{corollary}[]
+Let $E\to X$ be a vector bundle and let $s:X\to E$ be the 0-section. Set $E_0=s(X)\subseteq E$. Then
+\[CH^\bullet(E\bs E_0)\cong \frac{CH^\bullet(X)}{(c_r(E))}.\]
+\end{corollary}
+\begin{proof}
+By the self-intersection formula, $s^\ast s_\ast(\al)=\al c_r(\Nc_{X/E})$. Note also that $\Nc_{X/E}\cong E$ because $X\subseteq E$ is viewed as the zero-section (OK INTUITIVELY, BUT WHY FORMALLY ??????).
+
+Combining these facts with the localization exact sequence and the isomorphism between $CH^\bullet(X)$ and $CH^\bullet(E)$ we get
+% https://q.uiver.app/#q=WzAsNSxbMSwwLCJDSF5cXGJ1bGxldChFKSJdLFsyLDAsIkNIXlxcYnVsbGV0KEVcXGJzIEVfMCkiXSxbMCwwLCJDSF5cXGJ1bGxldChYKSJdLFszLDAsIjAiXSxbMSwxLCJDSF5cXGJ1bGxldChYKSJdLFswLDFdLFsyLDAsInNfXFxhc3QiXSxbMSwzXSxbMCw0LCJcXGNvbmcgIiwzLHsic3R5bGUiOnsiYm9keSI6eyJuYW1lIjoibm9uZSJ9LCJoZWFkIjp7Im5hbWUiOiJub25lIn19fV0sWzIsNCwiXFxjZG90IGNfcihFKSIsMl0sWzAsNCwic15cXGFzdCIsMCx7Im9mZnNldCI6LTEsInN0eWxlIjp7ImJvZHkiOnsibmFtZSI6Im5vbmUifSwiaGVhZCI6eyJuYW1lIjoibm9uZSJ9fX1dXQ==
+\[\begin{tikzcd}
+	{CH^\bullet(X)} & {CH^\bullet(E)} & {CH^\bullet(E\bs E_0)} & 0 \\
+	& {CH^\bullet(X)}
+	\arrow["{s_\ast}", from=1-1, to=1-2]
+	\arrow["{\cdot c_r(E)}"', from=1-1, to=2-2]
+	\arrow[from=1-2, to=1-3]
+	\arrow["{\cong }"{marking, allow upside down}, draw=none, from=1-2, to=2-2]
+	\arrow["{s^\ast}", shift left, draw=none, from=1-2, to=2-2]
+	\arrow[from=1-3, to=1-4]
+\end{tikzcd}\]
+which shows that
+\[CH^\bullet(E\bs E_0)\cong \frac{CH^\bullet(X)}{(c_r(E))}.\]
+\end{proof}
+
+
+
+\subsection{Geometric interpretation of Chern classes}
+\begin{theorem}[]
+If $s$ is a global section of $E\to X$ such that $\codim Z(s)=\rnk E$ then $[Z(s)]=c_r(E)$.
+\end{theorem}
+
+\begin{remark}
+In the case of the first Chern class of $\codim Z(s)=\rnk E=1$ we get back the first definition of $c_1$ we used for line bundles.
+\end{remark}
+
+\begin{remark}
+To describe $c_{r-i}(E)$ we need to find $s_1,\cdots, s_{i+1}$ global sections of $E$ such that $\codim Z(s_1,\cdots, s_{i+1})=r-i$ where $Z(s_1,\cdots, s_{i+1})=Z(s_1\wedge\cdots\wedge s_{i+1})$. If this equality holds then
+\[[Z(s_1,\cdots, s_{i+1})]=c_{r-i}(E)\]
+\end{remark}
+
+
+
+
+
+\section{Equivariant setting}
+We want to define a suitable intersection theory for the category whose objects are smooth $G$-varieties and whose maps are $G$-equivariant maps.
+We take $G$ to be a smooth linear reductive algebraic group. Also $k=\ol k$.
+
+If $X$ is a $G$-variety we want to define
+\[CH^\bullet_G(X)=CH^\bullet([X/G])\]
+We'd like that when $X/G$ is a scheme then $CH_G^\bullet(X)=CH^\bullet(X/G)$.
+
+Unfortunately, quotients of schemes do not always exist. However, in the previous section we showed that $CH^\bullet(X)=CH^\bullet(E)$ for any vector bundle on $X$, so if we can find a suitable $G$-bundle on $X$ we might still be in luck. Unfotunately, this idea too cannot work quite yet, since the quotient can never be a scheme (for example, the zeros have too many automorphisms), but if we remove from the bundle a $G$-invariant closed subset $Z$ of ``high enough codimension" and the quotient exists in that case then we may as well use that quotient to compute the Chow ring up to the degree which corresponds to the codimension of that $Z$ we removed.
+We are therefore give the following definition, which relies on what are called \textit{approximation spaces}.
+
+\begin{definition}[]
+Let $X$ be a $G$-variety. Let $V$ be a $G$-representation such that there exists $U\subseteq V$ open which is $G$-invariant and such that $\codim(V\bs U)>i$ and $U/G$ is a scheme. We define\footnote{note that $U/G$ existing implies that $(X\times U)/G$ exists where the action is the diagonal action.}
+\[CH_G^i(X)=CH^i((X\times U)/G)\]
+We also set\footnote{Even though it is just notation at this stage, we may think about $BG$ as some variety that has that Chow ring. This can be formalized and $BG$ is called the \textbf{classifying space} of $G$.}
+\[CH^i(BG):=CH^i_G(\Spec k)=CH^i(U/G).\]
+\end{definition}
+
+If this well defined? Suppose we have two approximation spaces $U=V\bs Z$ and $U'=V'\bs Z'$. Let $\wt U=(V\oplus V')\bs (X\times V'\cup V\times Z')$ and consider the diagram of equivariant inclusions
+% https://q.uiver.app/#q=WzAsNSxbMSwwLCJcXHd0IFUiXSxbMiwxLCJVJyJdLFswLDEsIlUiXSxbMCwwLCJWXFx0aW1lcyBWJ1xcYnMgWlxcdGltZXMgViciXSxbMiwwLCJWXFx0aW1lcyBWJ1xcYnMgVlxcdGltZXMgWiciXSxbMCwzXSxbMCw0XSxbMCwyXSxbMywyXSxbMCwxXSxbNCwxXV0=
+\[\begin{tikzcd}
+	{V\times V'\bs Z\times V'} & {\wt U} & {V\times V'\bs V\times Z'} \\
+	U && {U'}
+	\arrow[from=1-1, to=2-1]
+	\arrow[from=1-2, to=1-1]
+	\arrow[from=1-2, to=1-3]
+	\arrow[from=1-2, to=2-1]
+	\arrow[from=1-2, to=2-3]
+	\arrow[from=1-3, to=2-3]
+\end{tikzcd}\]
+This passes to the quotients
+% https://q.uiver.app/#q=WzAsNSxbMSwwLCJcXHd0IFUvRyJdLFsyLDEsIlUnL0ciXSxbMCwxLCJVL0ciXSxbMCwwLCJcXGZyYWN7VlxcdGltZXMgVidcXGJzIFpcXHRpbWVzIFYnfUciXSxbMiwwLCJcXGZyYWN7VlxcdGltZXMgVidcXGJzIFZcXHRpbWVzIFonfUciXSxbMCwzXSxbMCw0XSxbMCwyXSxbMywyXSxbMCwxXSxbNCwxXV0=
+\[\begin{tikzcd}
+	{\frac{V\times V'\bs Z\times V'}G} & {\wt U/G} & {\frac{V\times V'\bs V\times Z'}G} \\
+	{U/G} && {U'/G}
+	\arrow[from=1-1, to=2-1]
+	\arrow[from=1-2, to=1-1]
+	\arrow[from=1-2, to=1-3]
+	\arrow[from=1-2, to=2-1]
+	\arrow[from=1-2, to=2-3]
+	\arrow[from=1-3, to=2-3]
+\end{tikzcd}\]
+Note that the maps in this diagram are actually vector bundles so the Chow groups of everthing involved here are isomorphic.
+
+
+
+\begin{remark}
+Quotient maps are fppf, so all properties of maps we may care about can be checked locally.
+\end{remark}
+
+\subsection{Examples of Chow rings of classifying spaces}
+
+We may compute equivariant Chow rings via approximations spaces like in the definition:
+\begin{example}[Chow ring of classifying space of tori]
+Consider the standard scaling action $\G_m\acts\A^{r+1}\nz$ and note that it has a quotient $\Pj^{r}=\A^{r+1}\nz/\G_m$.
+
+Consider now $T=\G_m^n$ and note that it acts on $U=\prod_{i=1}^n(\A^{r+1}\nz)$ with quotient $U/T=(\Pj^r)^n$.
+We can use these as approximation spaces. Note that
+\[CH^\bullet((\Pj^r)^n)\cong\Z[h_1,\cdots, h_n]/(\cpa{h_i^{r+1}}_{1\leq i\leq n})\]
+with $h_i=c_1(X_i)$ for  $X_i$ the 1-dimensional representation induced by the character $\pr_i:T=\G_m^n\to \G_m=\GL_1$.
+
+
+The idea will be to take a projective limit
+\[CH^\bullet(B\G_m^n)=\varprojlim_r\frac{\Z[h_1,\cdots, h_n]}{(h_i^{r+1})}\]
+\end{example}
+
+The following lemmas may also be useful in this type of computations if we do not wish to go through approximation spaces:
+
+
+\begin{lemma}[]
+Suppose $X$ is a $G$-variety where $G$ acts transitively (that is, $G\times X\to X$ should be an epimorphism of fppf sheaves). Pick $x\in X(k)$ and set $S=\stab(x)\leq G$, then
+\[CH^\bullet_G(X)=CH^\bullet(BS).\]
+\end{lemma}
+\begin{proof}[Idea]
+Use the isomorphism
+\[(X\times U)/G\cong U/S\]
+\end{proof}
+
+\begin{lemma}[]
+If $H\cong \A^n_k$ is an algebraic group, the left action on itself is by affine transformations and $G$ is a linear algebraic group which acts on $H$ by affine transformations then
+\[CH^\bullet_{H\rtimes G}(X)\cong CH^\bullet_{G}(X)\]
+for any $H\rtimes G$-variety $X$.
+\end{lemma}
+\begin{proof}[Idea]
+Consider
+% https://q.uiver.app/#q=WzAsNCxbMSwwLCJcXGRmcmFje1hcXHRpbWVzIFVcXHRpbWVzIFxcZnJhY3tIXFxydGltZXMgR31HfXtIXFxydGltZXMgR30iXSxbMCwxLCJcXGRmcmFje1hcXHRpbWVzIFV9e0hcXHJ0aW1lcyBHfSJdLFswLDAsIlxcZGZyYWN7WFxcdGltZXMgVVxcdGltZXMgSH17SFxccnRpbWVzIEd9Il0sWzIsMCwiXFxkZnJhY3tYXFx0aW1lcyBVfUciXSxbMiwwLCJcXGNvbmciLDMseyJzdHlsZSI6eyJib2R5Ijp7Im5hbWUiOiJub25lIn0sImhlYWQiOnsibmFtZSI6Im5vbmUifX19XSxbMCwzLCJcXGNvbmciLDMseyJzdHlsZSI6eyJib2R5Ijp7Im5hbWUiOiJub25lIn0sImhlYWQiOnsibmFtZSI6Im5vbmUifX19XSxbMiwxXV0=
+\[\begin{tikzcd}
+	{\dfrac{X\times U\times H}{H\rtimes G}} & {\dfrac{X\times U\times \frac{H\rtimes G}G}{H\rtimes G}} & {\dfrac{X\times U}G} \\
+	{\dfrac{X\times U}{H\rtimes G}}
+	\arrow["\cong"{marking, allow upside down}, draw=none, from=1-1, to=1-2]
+	\arrow[from=1-1, to=2-1]
+	\arrow["\cong"{marking, allow upside down}, draw=none, from=1-2, to=1-3]
+\end{tikzcd}\]
+and note that the vertical map is an affine bundle.
+Like in the case of vector bundles, the pullback via an affine bundle gives an isomorphism of Chow rings.
+\end{proof}
+
+
+\begin{example}[Chow ring of $B\GL_n$]
+There is an isomorphism
+\[CH^\bullet B\GL_n\cong \Z[c_1,\cdots, c_n]\]
+where the $c_i$ are the $i$-th Chern classes of the natural representation of $\GL_n$.
+\end{example}
+\begin{proof}
+We proceed by induction on $n$. We already know the result is true for $n=1$ because $\GL_1=\G_m$.
+Let $V$ be the natural representation of $G=GL_n$\footnote{that is, $V=k^n$ and the action of $g\in G$ is the usual linear transformation associated to that matrix}. On $V\nz$ we have that $G$ acts transitively. We can view $V$ as a vector bundle over a point and so $V\nz$ is that bundle where we removed the zero section. Proceeding in a similar way to before
+% https://q.uiver.app/#q=WzAsNSxbMSwwLCJDSF5cXGJ1bGxldF9HKFYpIl0sWzAsMCwiQ0heXFxidWxsZXRfRyhcXFNwZWMgaykiXSxbMSwxLCJDSF5cXGJ1bGxldF9HKFxcU3BlYyBrKSJdLFsyLDAsIkNIXlxcYnVsbGV0X0coVlxcbnopIl0sWzMsMCwiMCJdLFsxLDBdLFswLDIsIlxcY29uZyAiLDMseyJzdHlsZSI6eyJib2R5Ijp7Im5hbWUiOiJub25lIn0sImhlYWQiOnsibmFtZSI6Im5vbmUifX19XSxbMSwyLCJcXGNkb3QgY19uKFYpIiwyXSxbMyw0XSxbMCwzXV0=
+\[\begin{tikzcd}
+	{CH^\bullet_G(\Spec k)} & {CH^\bullet_G(V)} & {CH^\bullet_G(V\nz)} & 0 \\
+	& {CH^\bullet_G(\Spec k)}
+	\arrow[from=1-1, to=1-2]
+	\arrow["{\cdot c_n(V)}"', from=1-1, to=2-2]
+	\arrow[from=1-2, to=1-3]
+	\arrow["{\cong }"{marking, allow upside down}, draw=none, from=1-2, to=2-2]
+	\arrow[from=1-3, to=1-4]
+\end{tikzcd}\]
+Note that where $S=\stab(e_1)$ can be interpreted as $S=H\rtimes \GL_{n-1}$ by writing matricies in $S$ in the form
+\[\mat{1 & \ast &\cdots &\ast\\
+0 & \ast &\cdots &\ast\\
+\vdots & \vdots &\ddots &\vdots\\
+0 & \ast &\cdots &\ast}.\]
+Note also that by the first lemma $CH^\bullet_G(V\nz)\cong CH^\bullet_S(\Spec k)$ and by the second lemma $CH^\bullet_S(\Spec k)\cong CH_S^\bullet(\Spec k)\cong CH^\bullet_{\GL_{n-1}}(\Spec k)$.
+
+By inductive hypothesis, we have shown that the $c_1,\cdots, c_n$ generate $CH^\bullet_G(V)=CH^\bullet(B\GL_n)$ (the first $n-1$ generate the quotient $CH^\bullet(B\GL_{n-1})$ and by the exact sequence if we also add $c_n$ we get everything).
+
+To show algebraic independence note that we have a torus $T\subseteq \GL_n$ so $f:BT\to B\GL_n$ and the $\GL_n$ representation $V$ becomes the representation $\bigoplus \chi_i$ where the $\chi_i$ are given by the characters.
+
+
+Note that $f^\ast(c_i)\in CH^\bullet(BT)$ is the $i$-th symmetric polynomial in the $\xi^i_r$, which are the chern classes of characters.
+
+
+\begin{lemma}[]
+The symmetric functions $\sigma_i$ are algebraically independent into $\Z[\xi_i,\cdots,\xi_r]\cong CH^\bullet(BT)$.
+\end{lemma}
+
+So $CH^\bullet(B\GL_n)=\Z[c_1,\cdots, c_n]$ where $c_i=c_i(V)$.
+\end{proof}
+
+
+
+
+
+
