@@ -185,6 +185,11 @@ The \textbf{dual}\footnote{also called \textbf{inverse} in the case of line bund
 \end{definition}
 
 \begin{definition}[]
+If $\Ec$ is a vector bundle of rank $r$, $\det \Ec=\bigwedge^r\Ec$.
+\end{definition}
+
+
+\begin{definition}[]
 An \textbf{algebraic vector bundle} is a morphism $p:E\to X$ of schemes such that for all $x\in X$ there exists $U$ neighborhood of $x$ such that $f\ii(U)\cong \A^r\times U$ and the transition maps are linear fiber-wise.
 \end{definition}
 
@@ -229,7 +234,9 @@ that is, $\mathrm{div}(\sigma)\sim \mathrm{div}(\tau)$.
 \end{proof}
 
 \begin{definition}[]
-We define $c_1(L)$ to be the class in $CH^1(X)$ of any divisor associated to a nonzero rational section of $L$.
+We define $c_1(L)$ to be the class in $CH^1(X)$ of any divisor associated to a nonzero rational section of $L$. 
+
+Equivalently, $c_1(L)$ is the class in $CH^1(X)\cong \Cl(X)$ that corresponds to $[L]\in \Pic(X)$.
 \end{definition}
 
 \begin{example}
@@ -308,12 +315,9 @@ We have that
 \begin{example}
 If $E=\bigoplus_{i=1}^r L_i$ and $\al_i=c_1(L_i)$ then
 \[c(E)=\prod_{i=1}^r(1+\al_i),\quad c(E^\vee)=\prod_{i=1}^r(1-\al_i),\quad c_k(E^\vee)=(-1)^kc_k(E)\]
+This is because $c(L_i)=c_0(L_i)+c_1(L_i)=1+\al_i$.
 \end{example}
 
-
-\begin{definition}[]
-If $\Ec$ is a vector bundle of rank $r$, $\det \Ec=\bigwedge^r\Ec$.
-\end{definition}
 
 \begin{proposition}[]
 $c_1(E)=c_1(\det E)$.
