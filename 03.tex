@@ -14,14 +14,14 @@ An \textbf{elliptic curve} over $k$ is a 1-dimensional scheme $C\to \Spec k$ ove
 Since the relative approach is central in the theory of schemes, we may want to define an elliptic curve over some base scheme $S$. The most sensible approach is to say that an elliptic curve over $S$ should be a ``family of elliptic curves parametrized by $S$". Formally:
 
 \begin{definition}[Elliptic curve over $S$]
-An \textbf{elliptic curve} over $S$ is a proper, smooth, flat morphism of schemes $p:E\to S$ with a fixed section $e:S\to E$ of $p$ such that for all $\Spec \Omega$ geometric point, the pullback is an elliptic curve over $\Omega$:
-% https://q.uiver.app/#q=WzAsNCxbMSwwLCJFIl0sWzEsMSwiUyJdLFswLDEsIlxcU3BlYyBcXE9tZWdhIl0sWzAsMCwiRVxcdGltZXNfU1xcU3BlY1xcT21lZ2EgIl0sWzMsMF0sWzMsMl0sWzIsMV0sWzAsMV1d
+An \textbf{elliptic curve} over $S$ is a proper, smooth, flat\footnote{Flatness corresponds in a vague sense to the property that the fibers should ``deform continuously". This notion can be made more precise, for example by looking at Hilbert polynomials among other things, but this vague intuition will be enough for our purposes.} morphism of schemes $p:E\to S$ with a fixed section $e:S\to E$ of $p$ such that for all geometric points $\Spec \Omega\to S$, the fiber is an elliptic curve over $\Omega$:
+% https://q.uiver.app/#q=WzAsNCxbMSwwLCJFIl0sWzEsMSwiUyJdLFswLDEsIlxcU3BlYyBcXE9tZWdhIl0sWzAsMCwiRVxcdGltZXNfU1xcU3BlY1xcT21lZ2EgIl0sWzMsMF0sWzMsMl0sWzIsMV0sWzAsMSwicCJdXQ==
 \[\begin{tikzcd}
 	{E\times_S\Spec\Omega } & E \\
 	{\Spec \Omega} & S
 	\arrow[from=1-1, to=1-2]
 	\arrow[from=1-1, to=2-1]
-	\arrow[from=1-2, to=2-2]
+	\arrow["p", from=1-2, to=2-2]
 	\arrow[from=2-1, to=2-2]
 \end{tikzcd}\]
 \end{definition}
@@ -36,7 +36,9 @@ When studying elliptic curves it would be useful to find some space $M_{1,1}$ su
 	\arrow[from=1-2, to=2-2]
 	\arrow["\phi"', from=2-1, to=2-2]
 \end{tikzcd}\]
-that is, we would be very happy if all families of elliptic curves could be described as the pullback of some \textit{universal family} $\Ec$ over $M_{1,1}$ along some morphism $S\to M_{1,1}$. Intuitively, the universal family should be the one defined by the fact that the fiber over a point of $M_{1,1}$ is the elliptic curve corresponding to that point. The morphism should be the one that to each point of $S$ assigns some elliptic curve, i.e. a point of $M_{1,1}$ (of course this naive view is too simple when dealing with schemes but it motivates why we look for such a map).
+This $\phi$ should be thought of naively as the map that to the point $P\in S(\Omega)$ assigns the point of $M_{1,1}(\Omega)$ that corresponds to the isomorphism class of the elliptic curve given by the fiber of $p:E\to S$ over $P$.
+
+In other words, we would be very happy if all families of elliptic curves could be described as the pullback of some \textit{universal family} $\Ec$ over $M_{1,1}$ along some morphism $S\to M_{1,1}$. Intuitively, the universal family should be the one defined by setting the fiber over a point of $M_{1,1}$ to be the elliptic curve corresponding to that point. 
 \bigskip
 
 A useful way to formulate this problem is to define the following functor\footnote{we technically have no guarantee that families over a scheme should form a set. This issue will be solved automatically later when we consider a fibered category over $\Sch$ instead of a functor.}
@@ -51,7 +53,7 @@ We recall the following simple but foundational result
 There is a natural correspondence
 \[\Hom(h_X,F)\leftrightarrow F(X)\]
 \end{theorem}
-\begin{proof}[sketch]
+\begin{proof}[Sketch]
 Suppose we have a natural transformation $\phi:h_X\to F$, then we can find an element of $F(X)$ by taking $\phi_X(id_X)=\xi$.
 
 Let us now fix an element $\xi\in F(X)$. Let $T$ be a scheme. We may construct a map $\Hom(T,X)\to F(T)$ by sending $f:T\to X$ to $F(f)(\xi)$. If $g:T\to S$ is a morphism then $\eta:f\mapsto g\circ f$ is mapped to $F(g):F(S)\to F(T)$. It is easy to check that this defines a natural transformation $h_X\to F$ and that the two constructions are inverses of each other.
@@ -87,7 +89,7 @@ Two elliptic curves are isomorphic over $\ol k$ if and only if they have the sam
 
 
 \begin{theorem}
-Let $E\to S$ be an elliptic curve, then there exists a Zariski affine open over of $S$ given by $\cpa{U_i=\Spec A_i}$ such that for all $i$
+Let $E\to S$ be an elliptic curve, then there exists a Zariski affine open cover of $S$ given by $\cpa{U_i=\Spec A_i}$ such that for all $i$
 % https://q.uiver.app/#q=WzAsNCxbMCwwLCJFX2k6PVxcU3BlY1xccGF7XFxkZnJhY3tBX2lbeCx5XX17KHleMi14XjMtQXgtQil9fSJdLFswLDEsIlxcU3BlYyBBX2kiXSxbMSwxLCJTIl0sWzEsMCwiRSJdLFswLDFdLFszLDJdLFswLDNdLFsxLDJdXQ==
 \[\begin{tikzcd}
 	{E_i:=\Spec\pa{\dfrac{A_i[x,y]}{(y^2-x^3-Ax-B)}}} & E \\
@@ -131,9 +133,9 @@ and
 	\arrow[from=2-2, to=3-2]
 	\arrow[from=3-1, to=3-2]
 \end{tikzcd}\]
-If $\A^1$ represented the functor, these two families should be isomorphic (both are pullbacks along $\Spec k[t,t\ii]\to \A^1$ of the universal family), but they are not:
+If $\A^1$ represented the functor, these two families should be isomorphic since for every specific choice $t\neq 0$ we have that $y^2=x^3-t$ and $y^2=x^3-1$ have the same $j$-invariant and so both families induce the same (constant) map $\Spec k[t^{\pm1}]\to \A^1$.
 
-it is possible to prove via the $j$-invariants that two Weierstrass equations yield isomorphic curves if and only if there exists some $u\in k[t^{\pm1}]$ such that substituting $x$ with $u^2x$ and $y$ with $u^3y$ transforms one equation into the other up to factoring out powers of $u$. Therefore we require for there to exist some $u$ such that
+However, the two families are NOT isomorphic by the following argument: It is possible to prove via the $j$-invariants that two Weierstrass equations yield isomorphic elliptic curves over $\Spec k[t^{\pm1}]$ if and only if there exists some $u\in k[t^{\pm1}]$ such that substituting $x$ with $u^2x$ and $y$ with $u^3y$ transforms one equation into the other up to factoring out powers of $u$. Therefore we require for there to exist some $u$ such that
 \[u^6y^2-u^6x^3+t=u^k(y^2-x^3+1)\coimplies t=u^6\]
 and this is impossible.
 \end{example}
@@ -150,7 +152,7 @@ If we consider the same families from before but now over the base $\Spec\frac{k
 \[\frac{k[x,y,t^\pm,w]}{(y^2-x^3+1,w^6-t)}\cong \frac{k[x,y,t^\pm,w]}{(y^2-x^3+t,w^6-t)}.\]
 This is because now we can choose $u=w$ with the notation from before. 
 
-The idea behind this observation is that if we allow ourselves to look at finer topologies on $\Sch$ we may be able to solve our representability issue. We are starting to see how viewing $F$ as a functor is not enough; we should view it as some kind of sheaf.
+The idea behind this observation is that if we allow ourselves to look at finer topologies\footnote{In this case, the natural map $\Spec\frac{k[t^{\pm1},w]}{(t-w^6)}\to\Spec k[t^{\pm 1}]$ is an \'etale cover.} on $\Sch$ we may be able to solve our representability issue. We are starting to see how viewing $F$ as a functor is not enough; we should view it as some kind of sheaf.
 \end{example}
 
 
@@ -158,7 +160,7 @@ The idea behind this observation is that if we allow ourselves to look at finer 
 
 So, what now? We have two options:
 \begin{itemize}
-    \item Rigidify the problem (GIT approach)
+    \item Rigidify the problem hoping that we get something representable
     \item Enlarge the category among which we search for the moduli space (Stacky approach) 
 \end{itemize}
 
@@ -180,7 +182,7 @@ The issue with families forming sets is now irrelevant. To be more precise, the 
 
 
 \begin{theorem}
-The fibered category $\Mc_{1,1}$ is a stack for the fpqc topology.
+The fibered category $\Mc_{1,1}$ is a stack for the fpqc topology\footnote{and thus for the coarser topologies like Zariski or \'Etale too.}.
 \end{theorem}
 \begin{proof}
 Olsson \cite{olsson2016algebraic}, chapter 13
@@ -199,7 +201,7 @@ From a categorical point of view, $\Mc_{1,1}$ does exactly what we want. Now we 
 \section{Algebraic stacks}
 If we want to think about stacks in a geometric way, we may want to impose some ``good behaviour" conditions. For example, one thing we may require is that if two ``normal" objects (for example schemes) live inside our stack, their intersection should still be a ``normal" object. The key definition to formalize this idea is
 \begin{definition}[Representable morphism]
-Let $\Xc\to \Yc$ be a morphism of stacks, then it is said to be \textbf{representable} if for all schemes $T$ and morphisms $T\to \Yc$ there exists an algebraic space $V$ such that
+Let $\Xc\to \Yc$ be a morphism of stacks, then it is said to be \textbf{representable} if for all schemes $T$ and morphisms $T\to \Yc$ there exists an algebraic space\footnote{An \textbf{algebraic space} is a gluing of affine schemes with respect to the \'etale topology instead of the Zariski topology.} $V$ such that
 % https://q.uiver.app/#q=WzAsNCxbMCwwLCJWIl0sWzAsMSwiXFxYYyJdLFsxLDEsIlxcWWMiXSxbMSwwLCJUIl0sWzAsMV0sWzMsMl0sWzAsM10sWzEsMl1d
 \[\begin{tikzcd}
 	V & T \\
@@ -215,11 +217,11 @@ We say that a morphism of stacks $\Xc\to \Yc$ has a property $\Pc$ for $\Pc$ a p
 \end{definition}
 
 \begin{remark}
-The properties ``begin smooth", ``begin surjective" and ``begin \'etale" are stable under base change.
+The properties ``begin smooth", ``begin surjective" and ``begin \'etale" are stable under base change, so it makes sense to talk about smooth/surjective/\'etale morphisms of stacks.
 \end{remark}
 
 \begin{definition}[Algebraic stack]
-A stack over a scheme $S$, i.e. a morphism of stacks $\Xc\to S$ is said to be \textbf{algebraic} if
+A stack over a scheme $S$, i.e. a morphism of stacks $\Xc\to S$, is said to be \textbf{algebraic} if
 \begin{enumerate}
 \item the diagonal $\Delta:\Xc\to \Xc\times_S\Xc$ is representable and 
 \item there exists a smooth and surjective morphism $\pi:X\to \Xc$ for $X$ scheme. This scheme is called an \textbf{atlas} for the algebraic stack.
@@ -234,7 +236,7 @@ Thinking about this set-theoretically may help in understanding the equivalence.
 \end{remark}
 
 \begin{remark}
-Property 2. can be thought of as ``finiteness" condition. The case of Deligne-Mumford stacks makes this even clearer because \'etale morphisms can be thought of as unramified covers, so we are saying that our stack admits a cover with total space being a scheme.
+Property 2. can be thought of as a ``finiteness" condition. The case of Deligne-Mumford stacks makes this even clearer because \'etale morphisms can be thought of as unramified covers, so we are saying that our stack admits a cover with total space being a scheme.
 \end{remark}
 
 
@@ -244,7 +246,10 @@ Property 2. can be thought of as ``finiteness" condition. The case of Deligne-Mu
 
 \section{Quotient stacks}
 
-Let us study a specific type of algebraic stacks: quotients.
+In this section we will explore quotient stacks and they essentially allow us to generalize in algebraic geometry the concept of taking the quotient of a space under the action of a group. There is a different (but related) machinery for the same general goal called \textit{Geometric Invariant Theory} (GIT) but the aspired results are different. In GIT one is concerned with \textit{when quotients exist} in some category (usually schemes), while quotient stacks allow us to \textit{define something that behaves like a quotient} without worrying about these existence questions but forcing us to generalize our notion of ``space".
+
+
+Like any stack, quotient stacks are categories. Let us define the objects:
 
 \begin{definition}[$G$-fibration]
 Let $X$ be a scheme, $G$ a group scheme. A \textbf{$G$-fibration} over $X$ is a scheme $\xi$ with an action $\mu:G\times \xi\to \xi$ and a $G$-invariant morphism $\pi:\xi\to X$, that is, we have a commutative diagram
@@ -268,6 +273,8 @@ A \textbf{principal $G$-bundle} with respect to the fpqc (or fppf, \'etale etc) 
 \end{definition}
 
 
+
+
 \begin{proposition}
 Let $X$ be a scheme and $G$ a linear algebraic group acting on $X$ via $\mu:X\times G\to X$. Assume that the action is free\footnote{for all schemes $\mu_T:X(T)\times G(T)\to X(T)$ is a free action of $G(T)$}, then $X/G$ exists as an algebraic space.
 
@@ -283,7 +290,7 @@ Moreover $\rho:X\to X/G$ is a principal $G$-bundle with respect to the \'etale t
 \end{tikzcd}\]
 \end{proposition}
 
-\begin{remark}
+\begin{remark}\label{ReHowToGetData}
 If we fix $f:U\to X/G$ and take $\xi$ to be the pullback of $X\to X/G$ along $U\to X/G$ 
 % https://q.uiver.app/#q=WzAsNCxbMCwwLCJcXHhpIl0sWzAsMSwiVSJdLFsxLDAsIlgiXSxbMSwxLCJYL0ciXSxbMCwyLCJcXGFsIl0sWzAsMSwiXFxwaSIsMl0sWzIsMywiXFxyaG8iXSxbMSwzLCJmIiwyXV0=
 \[\begin{tikzcd}
@@ -308,16 +315,21 @@ Let $X$ be a scheme and $G$ a smooth linear algebraic group acting on $X$, the \
 If $X=\Spec k$, $[\Spec k/G]=\B G$ is called the \textbf{classifying space} of $G$.
 \end{definition}
 
+Let's pause for a moment to understand why this definition makes sense. As defined, the quotient stack is the moduli space for the problem of classifying principal $G$-bundles with an equivariant map to $X$. So maps to $[X/G]$ correspond to this data.
+
+On the other hand, what should maps to a quotient of $X$ by $G$ entail? As in remark (\ref{ReHowToGetData}) by pullback of $X\to X/G$ via such a map we should get a $G$-bundle and a $G$-equivariant map to $X$.
+
+Putting these facts together, $[X/G]$ behaves like a categorical quotient should.
 
 
 \begin{theorem}
     $[X/G]$ is an algebraic stack
 \end{theorem}
-
-Let us quickly convince ourselves that $[X/G]$ should be an algebraic stack by looking at what the atlas should be:
+\begin{proof}[Partial idea]
+Let us convince ourselves that $[X/G]$ should be an algebraic stack with atlas $X$:
 \setlength{\leftmargini}{0cm}
 \begin{itemize}
-\item[] The obvious candidate for an atlas is $\pi:X\to [X/G]$ (think ``quotient map is a cover"). This morphism corresponds via the Yoneda lemma to a family of principal $G$-bundles over $X$, which is
+\item[] We want a morphism $\pi:X\to [X/G]$ (which intuituvely should be the quotient map). Such a morphism corresponds via the Yoneda lemma to a family of principal $G$-bundles over $X$, which we can choose to be
 % https://q.uiver.app/#q=WzAsMyxbMCwwLCJYXFx0aW1lcyBHIl0sWzAsMSwiWCJdLFsxLDAsIlgiXSxbMCwxLCJcXG11IiwyXSxbMCwyLCJcXHBpXzEiXV0=
 \[\begin{tikzcd}
 	{X\times G} & X \\
@@ -333,9 +345,10 @@ Let us quickly convince ourselves that $[X/G]$ should be an algebraic stack by l
 	\arrow["\al", from=1-1, to=1-2]
 	\arrow["\eta"', from=1-1, to=2-1]
 \end{tikzcd}\]
-with $\eta:\xi\to U$ smooth and surjective (not obvious but provable)
+It turns out that $\xi=X\times_{[X/G]}U$ so we would need to show that $\eta:\xi\to U$ is smooth and surjective (not obvious but provable).
 \end{itemize}
-\setlength{\leftmargini}{0.5cm} 
+\end{proof}
+
 
 
 
